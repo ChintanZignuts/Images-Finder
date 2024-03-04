@@ -1,6 +1,12 @@
 <script setup lang="ts">
+interface Image {
+  id: string
+  urls: { regular: string }
+  alt_description: string
+  user: { name: string; profile_image: { medium: string }; location: string }
+}
 defineProps<{
-  images: Object
+  images: Image[]
   error?: string
 }>()
 </script>
@@ -16,7 +22,6 @@ defineProps<{
           lg="4"
           md="4"
           sm="6"
-          xs="12"
         >
           <v-img
             :lazy-src="`https://picsum.photos/10/6?image=${3 * 5 + 10}`"
@@ -26,13 +31,31 @@ defineProps<{
             class="bg-grey-lighten-2 rounded-lg"
             cover
           >
-            <v-card-title class="text-h6 text-white d-flex flex-column">
-              <p class="mt-4">{{ image.user.name }}</p>
-
-              <div>
-                <p class="ma-0 text-body-1 font-weight-bold"></p>
-                <p class="text-caption font-weight-medium">sfsdfs</p>
+            <v-card-title
+              class="text-h6 text-white d-flex justify-space-between position-absolute w-100 align-center"
+              style="bottom: 0px"
+            >
+              <div class="d-flex align-center">
+                <v-avatar size="36px">
+                  <v-img
+                    v-if="image.user"
+                    alt="Avatar"
+                    :src="image.user.profile_image.medium"
+                  ></v-img>
+                </v-avatar>
+                <div class="ml-4">
+                  <p>{{ image.user.name }}</p>
+                  <p class="ma-0 text-body-1 font-weight-bold"></p>
+                  <p class="text-caption font-weight-medium">{{ image.user.location }}</p>
+                </div>
               </div>
+              <a
+                :href="image.urls.regular"
+                :download="`image_${image.id}`"
+                v-if="image.urls.regular"
+              >
+                <v-icon color="white" icon="mdi-eye" size="large"></v-icon>
+              </a>
             </v-card-title>
             <template v-slot:placeholder>
               <v-row align="center" class="fill-height ma-0" justify="center">
