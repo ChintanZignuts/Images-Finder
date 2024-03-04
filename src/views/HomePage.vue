@@ -58,14 +58,14 @@ onMounted(async () => {
 
   <div>
     <div v-if="!searchedimg">
-      <v-pagination :length="30" :total-visible="6" v-model="page"></v-pagination>
+      <VPagination :length="30" :total-visible="6" v-model="page"></VPagination>
     </div>
     <div v-else>
-      <v-pagination
+      <VPagination
         :length="totalpages < 30 ? totalpages : 30"
         :total-visible="6"
         v-model="searchedpages"
-      ></v-pagination>
+      ></VPagination>
     </div>
   </div>
 </template>

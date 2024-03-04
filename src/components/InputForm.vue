@@ -13,10 +13,10 @@ const handleInput = () => {
   <form @submit.prevent="handleInput">
     <div class="d-flex align-center justify-center">
       <div class="w-50 mt-5">
-        <v-text-field label="Search.." variant="outlined" v-model="searchItem"></v-text-field>
+        <VTextField label="Search.." variant="outlined" v-model="searchItem"></VTextField>
       </div>
       <div class="d-flex align-center justify-center ml-6">
-        <v-btn variant="tonal" icon="mdi-magnify" type="submit"></v-btn>
+        <VBtn variant="tonal" icon="mdi-magnify" type="submit"></VBtn>
       </div>
     </div>
   </form>
